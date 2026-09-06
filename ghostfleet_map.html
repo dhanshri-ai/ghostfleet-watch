@@ -1,0 +1,2821 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5ef19d83b53dc04f2ec7ae1a7af23dc0 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+    <div style="
+        position: fixed; 
+        bottom: 25px; left: 25px; width: 300px; 
+        background: rgba(15, 23, 42, 0.92); 
+        color: white; 
+        padding: 16px; 
+        border-radius: 10px; 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.6); 
+        border: 1px solid #334155;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 12px;
+        z-index: 9999;
+        backdrop-filter: blur(8px);">
+        
+        <div style="font-weight: 800; font-size: 15px; color: #38bdf8; display: flex; align-items: center; justify-content: space-between;">
+            <span>🛰️ GHOSTFLEET WATCH</span>
+            <span style="font-size: 10px; background: #0284c7; padding: 2px 6px; border-radius: 4px; color: white;">LIVE AUDIT</span>
+        </div>
+        
+        <div style="color: #94a3b8; font-size: 11px; margin-top: 2px; margin-bottom: 12px;">
+            Sector: Galapagos Marine Reserve (GMR)
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; padding: 4px 8px; background: rgba(16, 185, 129, 0.15); border-radius: 5px; border-left: 3px solid #10b981;">
+            <span>Verified Vessels (AIS + Radar):</span>
+            <b>49</b>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; padding: 4px 8px; background: rgba(239, 68, 68, 0.2); border-radius: 5px; border-left: 3px solid #ef4444;">
+            <span>🚨 Dark Vessels (MPA Breach):</span>
+            <b style="color: #fca5a5;">26</b>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-bottom: 8px; padding: 4px 8px; background: rgba(245, 158, 11, 0.15); border-radius: 5px; border-left: 3px solid #f59e0b;">
+            <span>⚠️ Dark Vessels (EEZ Perimeter):</span>
+            <b style="color: #fde68a;">0</b>
+        </div>
+        
+        <hr style="border: 0; border-top: 1px solid #334155; margin: 10px 0;">
+        
+        <div style="font-size: 10px; color: #64748b; line-height: 1.4;">
+            Copernicus Sentinel-1 SAR GRD &times; AISStream Telemetry<br>
+            Zero-Disk-Bloat Cloud-Optimized Streaming Engine
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_5ef19d83b53dc04f2ec7ae1a7af23dc0" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5ef19d83b53dc04f2ec7ae1a7af23dc0 = L.map(
+                "map_5ef19d83b53dc04f2ec7ae1a7af23dc0",
+                {
+                    center: [-1.1106405333333333, -89.867802],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+
+            
+
+        
+    
+            var tile_layer_8ded6f40a4d96af57f7927f42d35af35 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8ded6f40a4d96af57f7927f42d35af35.addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        function geo_json_ed09d276e913b2ae5f98fcec9920ea9f_styler(feature) {
+            switch(feature.properties.id) {
+                default:
+                    return {"color": "#00e5ff", "dashArray": "6, 6", "fillColor": "#00e5ff", "fillOpacity": 0.08, "weight": 2.5};
+            }
+        }
+
+        function geo_json_ed09d276e913b2ae5f98fcec9920ea9f_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_ed09d276e913b2ae5f98fcec9920ea9f = L.geoJson(null, {
+                onEachFeature: geo_json_ed09d276e913b2ae5f98fcec9920ea9f_onEachFeature,
+            
+                style: geo_json_ed09d276e913b2ae5f98fcec9920ea9f_styler,
+            ...{
+}
+        });
+
+        function geo_json_ed09d276e913b2ae5f98fcec9920ea9f_add (data) {
+            geo_json_ed09d276e913b2ae5f98fcec9920ea9f
+                .addData(data);
+        }
+            geo_json_ed09d276e913b2ae5f98fcec9920ea9f_add({"crs": {"properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}, "type": "name"}, "features": [{"geometry": {"coordinates": [[[-92.2, 1.7], [-89.15, 1.7], [-89.15, -1.65], [-92.2, -1.65], [-92.2, 1.7]]], "type": "Polygon"}, "properties": {"designation": "Marine Reserve / UNESCO World Heritage", "governance": "Ecuador Ministry of Environment", "id": "WDPA_GMR", "name": "Galapagos Marine Reserve", "rep_area_km2": 138000, "status": "Designated"}, "type": "Feature"}], "name": "Galapagos Marine Reserve (GMR)", "type": "FeatureCollection"});
+
+        
+    
+            geo_json_ed09d276e913b2ae5f98fcec9920ea9f.bindTooltip(
+                `<div>
+                     Galapagos Marine Reserve (Strict Protected Zone)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            geo_json_ed09d276e913b2ae5f98fcec9920ea9f.addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_2cba74050d2675ab1bb45462ed52f2d9 = L.circleMarker(
+                [-0.98126, -89.90728],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_4d2b415e2ee1ba95cd726516dd54f108 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_edc84f3da3bb64f7c3914b50e9b90865 = $(`<div id="html_edc84f3da3bb64f7c3914b50e9b90865" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001028<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 4.8 knots<br>             <b>Radar Offset:</b> 1.993 km<br>             <b>Backscatter:</b> 21.99 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_4d2b415e2ee1ba95cd726516dd54f108.setContent(html_edc84f3da3bb64f7c3914b50e9b90865);
+            
+        
+
+        circle_marker_2cba74050d2675ab1bb45462ed52f2d9.bindPopup(popup_4d2b415e2ee1ba95cd726516dd54f108)
+        ;
+
+        
+    
+    
+            circle_marker_2cba74050d2675ab1bb45462ed52f2d9.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d555f5631ef7154f629d1b6aeb7aa908 = L.circleMarker(
+                [-0.98168, -89.92482],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_62331098db8b537c1d692a1276776c8c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c4c5a7a8009bc267e324ae064df0e8c7 = $(`<div id="html_c4c5a7a8009bc267e324ae064df0e8c7" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001028<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 4.8 knots<br>             <b>Radar Offset:</b> 0.052 km<br>             <b>Backscatter:</b> 21.73 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_62331098db8b537c1d692a1276776c8c.setContent(html_c4c5a7a8009bc267e324ae064df0e8c7);
+            
+        
+
+        circle_marker_d555f5631ef7154f629d1b6aeb7aa908.bindPopup(popup_62331098db8b537c1d692a1276776c8c)
+        ;
+
+        
+    
+    
+            circle_marker_d555f5631ef7154f629d1b6aeb7aa908.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_59e6a63c1bf8d1448bc8b2dd835f9257 = L.circleMarker(
+                [-1.01838, -89.76515],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_60879713dd58df3ae5f2f5a8910d8854 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fee9ad0e56eba7e52f126137b5559758 = $(`<div id="html_fee9ad0e56eba7e52f126137b5559758" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001000<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.6 knots<br>             <b>Radar Offset:</b> 1.212 km<br>             <b>Backscatter:</b> 21.76 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_60879713dd58df3ae5f2f5a8910d8854.setContent(html_fee9ad0e56eba7e52f126137b5559758);
+            
+        
+
+        circle_marker_59e6a63c1bf8d1448bc8b2dd835f9257.bindPopup(popup_60879713dd58df3ae5f2f5a8910d8854)
+        ;
+
+        
+    
+    
+            circle_marker_59e6a63c1bf8d1448bc8b2dd835f9257.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a567dd767a03ef4a437f202c34934d0d = L.circleMarker(
+                [-0.9884, -89.91568],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_de7b3394ccf3990a2e5cc245290df259 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_082a5ccaee4c558a41afc8c410a51e3a = $(`<div id="html_082a5ccaee4c558a41afc8c410a51e3a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001028<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 4.8 knots<br>             <b>Radar Offset:</b> 1.277 km<br>             <b>Backscatter:</b> 21.96 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_de7b3394ccf3990a2e5cc245290df259.setContent(html_082a5ccaee4c558a41afc8c410a51e3a);
+            
+        
+
+        circle_marker_a567dd767a03ef4a437f202c34934d0d.bindPopup(popup_de7b3394ccf3990a2e5cc245290df259)
+        ;
+
+        
+    
+    
+            circle_marker_a567dd767a03ef4a437f202c34934d0d.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6879ce9205fb9b8be824caf8dd8fa368 = L.circleMarker(
+                [-1.02621, -89.77319],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_125eab2ae84d46775c59fcb74ea6667a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_bbdbabb0ea87d26450278fefff9b16c3 = $(`<div id="html_bbdbabb0ea87d26450278fefff9b16c3" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001000<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.6 knots<br>             <b>Radar Offset:</b> 0.246 km<br>             <b>Backscatter:</b> 22.23 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_125eab2ae84d46775c59fcb74ea6667a.setContent(html_bbdbabb0ea87d26450278fefff9b16c3);
+            
+        
+
+        circle_marker_6879ce9205fb9b8be824caf8dd8fa368.bindPopup(popup_125eab2ae84d46775c59fcb74ea6667a)
+        ;
+
+        
+    
+    
+            circle_marker_6879ce9205fb9b8be824caf8dd8fa368.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b8df5ba83f79792eb8f1a5fd9d6cc663 = L.circleMarker(
+                [-1.02717, -89.76985],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_85731eb18ea779014d0d9ad2f31bfa9f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0dea28ae1500ce22e399780cf5832b8e = $(`<div id="html_0dea28ae1500ce22e399780cf5832b8e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001000<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.6 knots<br>             <b>Radar Offset:</b> 0.164 km<br>             <b>Backscatter:</b> 22.38 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_85731eb18ea779014d0d9ad2f31bfa9f.setContent(html_0dea28ae1500ce22e399780cf5832b8e);
+            
+        
+
+        circle_marker_b8df5ba83f79792eb8f1a5fd9d6cc663.bindPopup(popup_85731eb18ea779014d0d9ad2f31bfa9f)
+        ;
+
+        
+    
+    
+            circle_marker_b8df5ba83f79792eb8f1a5fd9d6cc663.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5050469de985ffebdae4a3dd760f1024 = L.circleMarker(
+                [-1.02732, -89.77112],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_0c967b8098d089df57ca795487c608f8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_653f21eafc1cc96fb3dc0c28e5a0f036 = $(`<div id="html_653f21eafc1cc96fb3dc0c28e5a0f036" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001000<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.6 knots<br>             <b>Radar Offset:</b> 0.022 km<br>             <b>Backscatter:</b> 21.96 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_0c967b8098d089df57ca795487c608f8.setContent(html_653f21eafc1cc96fb3dc0c28e5a0f036);
+            
+        
+
+        circle_marker_5050469de985ffebdae4a3dd760f1024.bindPopup(popup_0c967b8098d089df57ca795487c608f8)
+        ;
+
+        
+    
+    
+            circle_marker_5050469de985ffebdae4a3dd760f1024.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8e2d7a02dc464a0871d961b535283dee = L.circleMarker(
+                [-1.02744, -89.77199],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_f4820178d90d415ea5e292c7a0039c66 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8aeaf0d8639a87fc94639a765c8944dc = $(`<div id="html_8aeaf0d8639a87fc94639a765c8944dc" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001000<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.6 knots<br>             <b>Radar Offset:</b> 0.076 km<br>             <b>Backscatter:</b> 22.01 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_f4820178d90d415ea5e292c7a0039c66.setContent(html_8aeaf0d8639a87fc94639a765c8944dc);
+            
+        
+
+        circle_marker_8e2d7a02dc464a0871d961b535283dee.bindPopup(popup_f4820178d90d415ea5e292c7a0039c66)
+        ;
+
+        
+    
+    
+            circle_marker_8e2d7a02dc464a0871d961b535283dee.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_abc7977f6d3a24fe51ec8a1eb176ad9e = L.circleMarker(
+                [-1.02759, -89.7716],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_57ea482e84b5988ed15a305d94bbf580 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3029c8da669cbc55cb45d282f7e98b40 = $(`<div id="html_3029c8da669cbc55cb45d282f7e98b40" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001000<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.6 knots<br>             <b>Radar Offset:</b> 0.04 km<br>             <b>Backscatter:</b> 21.88 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_57ea482e84b5988ed15a305d94bbf580.setContent(html_3029c8da669cbc55cb45d282f7e98b40);
+            
+        
+
+        circle_marker_abc7977f6d3a24fe51ec8a1eb176ad9e.bindPopup(popup_57ea482e84b5988ed15a305d94bbf580)
+        ;
+
+        
+    
+    
+            circle_marker_abc7977f6d3a24fe51ec8a1eb176ad9e.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9db45ba2beea6107928558cf8a62c8b6 = L.circleMarker(
+                [-1.02875, -89.7723],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_846bf52fa12b7422598cfc1c16069d31 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3582e0f11c56c89e762437f387bca18f = $(`<div id="html_3582e0f11c56c89e762437f387bca18f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001002<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 6.1 knots<br>             <b>Radar Offset:</b> 0.016 km<br>             <b>Backscatter:</b> 21.93 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_846bf52fa12b7422598cfc1c16069d31.setContent(html_3582e0f11c56c89e762437f387bca18f);
+            
+        
+
+        circle_marker_9db45ba2beea6107928558cf8a62c8b6.bindPopup(popup_846bf52fa12b7422598cfc1c16069d31)
+        ;
+
+        
+    
+    
+            circle_marker_9db45ba2beea6107928558cf8a62c8b6.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ed82ee7c728e53cd3785279c23b1edd2 = L.circleMarker(
+                [-1.02936, -89.77267],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_5378ed89322b73326dc004284d4fd6e0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_cab89e10f4b165896f6c3bde4e2bff9a = $(`<div id="html_cab89e10f4b165896f6c3bde4e2bff9a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001002<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 6.1 knots<br>             <b>Radar Offset:</b> 0.082 km<br>             <b>Backscatter:</b> 21.96 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_5378ed89322b73326dc004284d4fd6e0.setContent(html_cab89e10f4b165896f6c3bde4e2bff9a);
+            
+        
+
+        circle_marker_ed82ee7c728e53cd3785279c23b1edd2.bindPopup(popup_5378ed89322b73326dc004284d4fd6e0)
+        ;
+
+        
+    
+    
+            circle_marker_ed82ee7c728e53cd3785279c23b1edd2.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_57db296339407e9a6307d4290810f490 = L.circleMarker(
+                [-1.02917, -89.77427],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_c65936bbb62b8e2f33241b5f206c35fa = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_52e281010fae4a2afcdd5d347fbfe86e = $(`<div id="html_52e281010fae4a2afcdd5d347fbfe86e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001002<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 6.1 knots<br>             <b>Radar Offset:</b> 0.213 km<br>             <b>Backscatter:</b> 22.38 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_c65936bbb62b8e2f33241b5f206c35fa.setContent(html_52e281010fae4a2afcdd5d347fbfe86e);
+            
+        
+
+        circle_marker_57db296339407e9a6307d4290810f490.bindPopup(popup_c65936bbb62b8e2f33241b5f206c35fa)
+        ;
+
+        
+    
+    
+            circle_marker_57db296339407e9a6307d4290810f490.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a3778b03ec61e27ad7e86509cbc83a5f = L.circleMarker(
+                [-1.0297, -89.77811],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_f6cedfe77878280b4550df949ce6583c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b49eb989cbef51556e4cb0d9a217d092 = $(`<div id="html_b49eb989cbef51556e4cb0d9a217d092" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> OCEAN_PATROL_04<br>             <b>MMSI:</b> 735001021<br>             <b>Flag:</b> Ecuador Navy<br>             <b>Speed:</b> 8.8 knots<br>             <b>Radar Offset:</b> 0.077 km<br>             <b>Backscatter:</b> 22.12 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_f6cedfe77878280b4550df949ce6583c.setContent(html_b49eb989cbef51556e4cb0d9a217d092);
+            
+        
+
+        circle_marker_a3778b03ec61e27ad7e86509cbc83a5f.bindPopup(popup_f6cedfe77878280b4550df949ce6583c)
+        ;
+
+        
+    
+    
+            circle_marker_a3778b03ec61e27ad7e86509cbc83a5f.bindTooltip(
+                `<div>
+                     Verified: OCEAN_PATROL_04
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9314a4286ea68737598cf1845d907ac0 = L.circleMarker(
+                [-1.01153, -89.89024],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_100bae9feaba071eb52d7324018fd474 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_06cc0aa85577a040bfc7b4e42042bf4c = $(`<div id="html_06cc0aa85577a040bfc7b4e42042bf4c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001014<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 8.0 knots<br>             <b>Radar Offset:</b> 0.233 km<br>             <b>Backscatter:</b> 21.76 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_100bae9feaba071eb52d7324018fd474.setContent(html_06cc0aa85577a040bfc7b4e42042bf4c);
+            
+        
+
+        circle_marker_9314a4286ea68737598cf1845d907ac0.bindPopup(popup_100bae9feaba071eb52d7324018fd474)
+        ;
+
+        
+    
+    
+            circle_marker_9314a4286ea68737598cf1845d907ac0.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ce6c906ef17c716af7c356314440db25 = L.circleMarker(
+                [-1.01259, -89.88968],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_3e0500cd1c3ec74ec1dc455260cc3473 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_978305f93d45e86e54c88cf2c75993c9 = $(`<div id="html_978305f93d45e86e54c88cf2c75993c9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001014<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 8.0 knots<br>             <b>Radar Offset:</b> 0.117 km<br>             <b>Backscatter:</b> 21.99 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_3e0500cd1c3ec74ec1dc455260cc3473.setContent(html_978305f93d45e86e54c88cf2c75993c9);
+            
+        
+
+        circle_marker_ce6c906ef17c716af7c356314440db25.bindPopup(popup_3e0500cd1c3ec74ec1dc455260cc3473)
+        ;
+
+        
+    
+    
+            circle_marker_ce6c906ef17c716af7c356314440db25.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d751ebf2e2fe1166b740dbadc22a5efb = L.circleMarker(
+                [-1.01937, -89.89823],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_ba83c90688f84ed475d70434edfa9b3a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7bbb18e3654e88c39c8897e450d8f4de = $(`<div id="html_7bbb18e3654e88c39c8897e450d8f4de" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001014<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 8.0 knots<br>             <b>Radar Offset:</b> 1.279 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_ba83c90688f84ed475d70434edfa9b3a.setContent(html_7bbb18e3654e88c39c8897e450d8f4de);
+            
+        
+
+        circle_marker_d751ebf2e2fe1166b740dbadc22a5efb.bindPopup(popup_ba83c90688f84ed475d70434edfa9b3a)
+        ;
+
+        
+    
+    
+            circle_marker_d751ebf2e2fe1166b740dbadc22a5efb.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ff304b4e49d3b7c6a1970921e1548c4f = L.circleMarker(
+                [-1.02214, -89.88632],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_9ef9d1a62c9f53b3cf0db51b56f378e7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c7283c7d5e27e3399cd43041b987de77 = $(`<div id="html_c7283c7d5e27e3399cd43041b987de77" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> MAR_DEL_SUR<br>             <b>MMSI:</b> 735001023<br>             <b>Flag:</b> Peru<br>             <b>Speed:</b> 7.8 knots<br>             <b>Radar Offset:</b> 0.055 km<br>             <b>Backscatter:</b> 22.1 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_9ef9d1a62c9f53b3cf0db51b56f378e7.setContent(html_c7283c7d5e27e3399cd43041b987de77);
+            
+        
+
+        circle_marker_ff304b4e49d3b7c6a1970921e1548c4f.bindPopup(popup_9ef9d1a62c9f53b3cf0db51b56f378e7)
+        ;
+
+        
+    
+    
+            circle_marker_ff304b4e49d3b7c6a1970921e1548c4f.bindTooltip(
+                `<div>
+                     Verified: MAR_DEL_SUR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_895655ce41710709b0db424b4565f329 = L.circleMarker(
+                [-1.01812, -89.91956],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_fb8e3e39a1e470a46f765a5a3046d32f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b7dc9d72258e8ed5f701584dd5e4c0a1 = $(`<div id="html_b7dc9d72258e8ed5f701584dd5e4c0a1" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001020<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 7.5 knots<br>             <b>Radar Offset:</b> 1.978 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_fb8e3e39a1e470a46f765a5a3046d32f.setContent(html_b7dc9d72258e8ed5f701584dd5e4c0a1);
+            
+        
+
+        circle_marker_895655ce41710709b0db424b4565f329.bindPopup(popup_fb8e3e39a1e470a46f765a5a3046d32f)
+        ;
+
+        
+    
+    
+            circle_marker_895655ce41710709b0db424b4565f329.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_302bff9d73112ce46f5140af74d04e53 = L.circleMarker(
+                [-1.04202, -89.84577],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_affba305f787589682be24e5b18eef47 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7b54a14759f0a55640f82be26b66be2d = $(`<div id="html_7b54a14759f0a55640f82be26b66be2d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> MAR_DEL_SUR<br>             <b>MMSI:</b> 735001017<br>             <b>Flag:</b> Peru<br>             <b>Speed:</b> 4.1 knots<br>             <b>Radar Offset:</b> 0.057 km<br>             <b>Backscatter:</b> 21.73 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_affba305f787589682be24e5b18eef47.setContent(html_7b54a14759f0a55640f82be26b66be2d);
+            
+        
+
+        circle_marker_302bff9d73112ce46f5140af74d04e53.bindPopup(popup_affba305f787589682be24e5b18eef47)
+        ;
+
+        
+    
+    
+            circle_marker_302bff9d73112ce46f5140af74d04e53.bindTooltip(
+                `<div>
+                     Verified: MAR_DEL_SUR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7ad4b88159734a2544a80e985a0d7790 = L.circleMarker(
+                [-1.0352, -89.88298],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_1254a57b23674d83c1eb2a172e0a5772 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_36f2497fc3729a89905db43c38d9701f = $(`<div id="html_36f2497fc3729a89905db43c38d9701f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> MAR_DEL_SUR<br>             <b>MMSI:</b> 735001011<br>             <b>Flag:</b> Peru<br>             <b>Speed:</b> 8.2 knots<br>             <b>Radar Offset:</b> 0.113 km<br>             <b>Backscatter:</b> 22.17 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_1254a57b23674d83c1eb2a172e0a5772.setContent(html_36f2497fc3729a89905db43c38d9701f);
+            
+        
+
+        circle_marker_7ad4b88159734a2544a80e985a0d7790.bindPopup(popup_1254a57b23674d83c1eb2a172e0a5772)
+        ;
+
+        
+    
+    
+            circle_marker_7ad4b88159734a2544a80e985a0d7790.bindTooltip(
+                `<div>
+                     Verified: MAR_DEL_SUR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a5c21f28df8b9c93d4802a6c8c97bfd8 = L.circleMarker(
+                [-1.0233, -89.95457],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_f8a8fd28e941e0966b912cdc6f273ed8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_9fd45da703e2fd8025f29c901ba9fc8b = $(`<div id="html_9fd45da703e2fd8025f29c901ba9fc8b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> PACIFIC_RANGER<br>             <b>MMSI:</b> 735001025<br>             <b>Flag:</b> Panama<br>             <b>Speed:</b> 8.2 knots<br>             <b>Radar Offset:</b> 0.066 km<br>             <b>Backscatter:</b> 21.79 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_f8a8fd28e941e0966b912cdc6f273ed8.setContent(html_9fd45da703e2fd8025f29c901ba9fc8b);
+            
+        
+
+        circle_marker_a5c21f28df8b9c93d4802a6c8c97bfd8.bindPopup(popup_f8a8fd28e941e0966b912cdc6f273ed8)
+        ;
+
+        
+    
+    
+            circle_marker_a5c21f28df8b9c93d4802a6c8c97bfd8.bindTooltip(
+                `<div>
+                     Verified: PACIFIC_RANGER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_80bc08dde4342e94d4b7c99c28745883 = L.circleMarker(
+                [-1.05168, -89.82677],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_7fe41913cfdd268ced48e0889e10fb38 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_13abee5a1290b312ec47b7934abc28a8 = $(`<div id="html_13abee5a1290b312ec47b7934abc28a8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001008<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 7.9 knots<br>             <b>Radar Offset:</b> 0.106 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_7fe41913cfdd268ced48e0889e10fb38.setContent(html_13abee5a1290b312ec47b7934abc28a8);
+            
+        
+
+        circle_marker_80bc08dde4342e94d4b7c99c28745883.bindPopup(popup_7fe41913cfdd268ced48e0889e10fb38)
+        ;
+
+        
+    
+    
+            circle_marker_80bc08dde4342e94d4b7c99c28745883.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2925c751296a228f825d8ee9ff46b6fb = L.circleMarker(
+                [-1.03317, -89.93074],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_69bb658f155266094ac0a8b4e00a17fa = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_633363bb86155ce269efa063a3954d5a = $(`<div id="html_633363bb86155ce269efa063a3954d5a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001020<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 7.5 knots<br>             <b>Radar Offset:</b> 0.113 km<br>             <b>Backscatter:</b> 21.73 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_69bb658f155266094ac0a8b4e00a17fa.setContent(html_633363bb86155ce269efa063a3954d5a);
+            
+        
+
+        circle_marker_2925c751296a228f825d8ee9ff46b6fb.bindPopup(popup_69bb658f155266094ac0a8b4e00a17fa)
+        ;
+
+        
+    
+    
+            circle_marker_2925c751296a228f825d8ee9ff46b6fb.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_33cddeb4d063708b2cb1c996490eaf1e = L.circleMarker(
+                [-1.02185, -89.98982],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_d01482c3566158f290442506704e9fb1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_31cd65a8328a13b02a7e8f2a99fe24af = $(`<div id="html_31cd65a8328a13b02a7e8f2a99fe24af" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> PACIFIC_RANGER<br>             <b>MMSI:</b> 735001001<br>             <b>Flag:</b> Panama<br>             <b>Speed:</b> 7.4 knots<br>             <b>Radar Offset:</b> 0.136 km<br>             <b>Backscatter:</b> 21.82 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_d01482c3566158f290442506704e9fb1.setContent(html_31cd65a8328a13b02a7e8f2a99fe24af);
+            
+        
+
+        circle_marker_33cddeb4d063708b2cb1c996490eaf1e.bindPopup(popup_d01482c3566158f290442506704e9fb1)
+        ;
+
+        
+    
+    
+            circle_marker_33cddeb4d063708b2cb1c996490eaf1e.bindTooltip(
+                `<div>
+                     Verified: PACIFIC_RANGER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_36ee9c1589a7338676b7d81a136056f3 = L.circleMarker(
+                [-1.04714, -89.90529],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_d5b38940a957feb3ecd9a8765768ac9f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8d45d8d091a793c41801981180824762 = $(`<div id="html_8d45d8d091a793c41801981180824762" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> PACIFIC_RANGER<br>             <b>MMSI:</b> 735001007<br>             <b>Flag:</b> Panama<br>             <b>Speed:</b> 9.8 knots<br>             <b>Radar Offset:</b> 0.054 km<br>             <b>Backscatter:</b> 22.01 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_d5b38940a957feb3ecd9a8765768ac9f.setContent(html_8d45d8d091a793c41801981180824762);
+            
+        
+
+        circle_marker_36ee9c1589a7338676b7d81a136056f3.bindPopup(popup_d5b38940a957feb3ecd9a8765768ac9f)
+        ;
+
+        
+    
+    
+            circle_marker_36ee9c1589a7338676b7d81a136056f3.bindTooltip(
+                `<div>
+                     Verified: PACIFIC_RANGER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_213496f3c7d9a221888ac4e792900c9c = L.circleMarker(
+                [-1.04725, -89.90522],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_f1977c6e3a61dd57982df2efb216450f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c6e093d6b0b099a65d04327f1e9e99bf = $(`<div id="html_c6e093d6b0b099a65d04327f1e9e99bf" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> PACIFIC_RANGER<br>             <b>MMSI:</b> 735001007<br>             <b>Flag:</b> Panama<br>             <b>Speed:</b> 9.8 knots<br>             <b>Radar Offset:</b> 0.058 km<br>             <b>Backscatter:</b> 21.82 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_f1977c6e3a61dd57982df2efb216450f.setContent(html_c6e093d6b0b099a65d04327f1e9e99bf);
+            
+        
+
+        circle_marker_213496f3c7d9a221888ac4e792900c9c.bindPopup(popup_f1977c6e3a61dd57982df2efb216450f)
+        ;
+
+        
+    
+    
+            circle_marker_213496f3c7d9a221888ac4e792900c9c.bindTooltip(
+                `<div>
+                     Verified: PACIFIC_RANGER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4fe4b9cb5c1184181d5eefa718d08c77 = L.circleMarker(
+                [-1.05231, -89.92127],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_183337d52159823761e916a42b052b81 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_1866c7eb80c2ae1f067b3e64a83b2bb4 = $(`<div id="html_1866c7eb80c2ae1f067b3e64a83b2bb4" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> PACIFIC_RANGER<br>             <b>MMSI:</b> 735001013<br>             <b>Flag:</b> Panama<br>             <b>Speed:</b> 10.8 knots<br>             <b>Radar Offset:</b> 0.106 km<br>             <b>Backscatter:</b> 21.85 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_183337d52159823761e916a42b052b81.setContent(html_1866c7eb80c2ae1f067b3e64a83b2bb4);
+            
+        
+
+        circle_marker_4fe4b9cb5c1184181d5eefa718d08c77.bindPopup(popup_183337d52159823761e916a42b052b81)
+        ;
+
+        
+    
+    
+            circle_marker_4fe4b9cb5c1184181d5eefa718d08c77.bindTooltip(
+                `<div>
+                     Verified: PACIFIC_RANGER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3372c7062126088be9d3e830a6158bc8 = L.circleMarker(
+                [-1.05776, -89.91835],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_5cdd5b9c8df76103591f3827a7b6da08 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_20b0cad06cd6d0293050de1e42a94785 = $(`<div id="html_20b0cad06cd6d0293050de1e42a94785" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> OCEAN_PATROL_04<br>             <b>MMSI:</b> 735001015<br>             <b>Flag:</b> Ecuador Navy<br>             <b>Speed:</b> 10.9 knots<br>             <b>Radar Offset:</b> 0.11 km<br>             <b>Backscatter:</b> 21.99 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_5cdd5b9c8df76103591f3827a7b6da08.setContent(html_20b0cad06cd6d0293050de1e42a94785);
+            
+        
+
+        circle_marker_3372c7062126088be9d3e830a6158bc8.bindPopup(popup_5cdd5b9c8df76103591f3827a7b6da08)
+        ;
+
+        
+    
+    
+            circle_marker_3372c7062126088be9d3e830a6158bc8.bindTooltip(
+                `<div>
+                     Verified: OCEAN_PATROL_04
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7dbd0082da0179cae46b67315de0d141 = L.circleMarker(
+                [-1.06215, -89.97849],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_8c85708aa402106d52d105fe81d54fce = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5f7a9d3e842918988d941a6430d112a9 = $(`<div id="html_5f7a9d3e842918988d941a6430d112a9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> GALAPAGOS_EXPLORER<br>             <b>MMSI:</b> 735001026<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 5.8 knots<br>             <b>Radar Offset:</b> 0.103 km<br>             <b>Backscatter:</b> 21.96 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_8c85708aa402106d52d105fe81d54fce.setContent(html_5f7a9d3e842918988d941a6430d112a9);
+            
+        
+
+        circle_marker_7dbd0082da0179cae46b67315de0d141.bindPopup(popup_8c85708aa402106d52d105fe81d54fce)
+        ;
+
+        
+    
+    
+            circle_marker_7dbd0082da0179cae46b67315de0d141.bindTooltip(
+                `<div>
+                     Verified: GALAPAGOS_EXPLORER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a8ef711b2595680d1d7e44f4f651ec52 = L.circleMarker(
+                [-1.08871, -89.94458],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_9798114891d69cb2dd40b74fcbbcac2c = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f779ed6dd13931499ccbe2e58e612212 = $(`<div id="html_f779ed6dd13931499ccbe2e58e612212" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001012<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.5 knots<br>             <b>Radar Offset:</b> 1.895 km<br>             <b>Backscatter:</b> 21.96 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_9798114891d69cb2dd40b74fcbbcac2c.setContent(html_f779ed6dd13931499ccbe2e58e612212);
+            
+        
+
+        circle_marker_a8ef711b2595680d1d7e44f4f651ec52.bindPopup(popup_9798114891d69cb2dd40b74fcbbcac2c)
+        ;
+
+        
+    
+    
+            circle_marker_a8ef711b2595680d1d7e44f4f651ec52.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4dcc01e23705ffc01598ce564c354613 = L.circleMarker(
+                [-1.1053, -89.94128],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_17ccebeaf7015e44e33d215fd8977e20 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_783534e051b119721547e8932d5be47e = $(`<div id="html_783534e051b119721547e8932d5be47e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001012<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.5 knots<br>             <b>Radar Offset:</b> 0.094 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_17ccebeaf7015e44e33d215fd8977e20.setContent(html_783534e051b119721547e8932d5be47e);
+            
+        
+
+        circle_marker_4dcc01e23705ffc01598ce564c354613.bindPopup(popup_17ccebeaf7015e44e33d215fd8977e20)
+        ;
+
+        
+    
+    
+            circle_marker_4dcc01e23705ffc01598ce564c354613.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f7bb1f28efb0854fce28d81002ca5493 = L.circleMarker(
+                [-1.10416, -89.95584],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_cbcd250343833c508fbc92a70deafe71 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c0ee84435da46bac1bcb62272cb28566 = $(`<div id="html_c0ee84435da46bac1bcb62272cb28566" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001012<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.5 knots<br>             <b>Radar Offset:</b> 1.716 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_cbcd250343833c508fbc92a70deafe71.setContent(html_c0ee84435da46bac1bcb62272cb28566);
+            
+        
+
+        circle_marker_f7bb1f28efb0854fce28d81002ca5493.bindPopup(popup_cbcd250343833c508fbc92a70deafe71)
+        ;
+
+        
+    
+    
+            circle_marker_f7bb1f28efb0854fce28d81002ca5493.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b8e2b66814b826355b3b742a40870466 = L.circleMarker(
+                [-1.11018, -89.94755],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_b00f81a167610c129ad35882acd7e3a8 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f3d2a79e97713aea3b75b8e2276b66a6 = $(`<div id="html_f3d2a79e97713aea3b75b8e2276b66a6" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001012<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 9.5 knots<br>             <b>Radar Offset:</b> 0.963 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_b00f81a167610c129ad35882acd7e3a8.setContent(html_f3d2a79e97713aea3b75b8e2276b66a6);
+            
+        
+
+        circle_marker_b8e2b66814b826355b3b742a40870466.bindPopup(popup_b00f81a167610c129ad35882acd7e3a8)
+        ;
+
+        
+    
+    
+            circle_marker_b8e2b66814b826355b3b742a40870466.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d8b473c58ce97a1532c7f7f248d6c66f = L.circleMarker(
+                [-1.15917, -89.82948],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_8e4c4a6a71e157a9d3f39b84bf407450 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_00249190b7a081999c4ecfdb51ce1b79 = $(`<div id="html_00249190b7a081999c4ecfdb51ce1b79" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> OCEAN_PATROL_04<br>             <b>MMSI:</b> 735001027<br>             <b>Flag:</b> Ecuador Navy<br>             <b>Speed:</b> 11.5 knots<br>             <b>Radar Offset:</b> 0.063 km<br>             <b>Backscatter:</b> 21.88 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_8e4c4a6a71e157a9d3f39b84bf407450.setContent(html_00249190b7a081999c4ecfdb51ce1b79);
+            
+        
+
+        circle_marker_d8b473c58ce97a1532c7f7f248d6c66f.bindPopup(popup_8e4c4a6a71e157a9d3f39b84bf407450)
+        ;
+
+        
+    
+    
+            circle_marker_d8b473c58ce97a1532c7f7f248d6c66f.bindTooltip(
+                `<div>
+                     Verified: OCEAN_PATROL_04
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_667073e0dbd8ede8f9e0844bf364f18a = L.circleMarker(
+                [-1.14926, -89.93752],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_091221a0768497de28820b2395914d0e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_08120b5d788de4623391e833e904c677 = $(`<div id="html_08120b5d788de4623391e833e904c677" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> PACIFIC_RANGER<br>             <b>MMSI:</b> 735001019<br>             <b>Flag:</b> Panama<br>             <b>Speed:</b> 5.7 knots<br>             <b>Radar Offset:</b> 0.036 km<br>             <b>Backscatter:</b> 21.76 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_091221a0768497de28820b2395914d0e.setContent(html_08120b5d788de4623391e833e904c677);
+            
+        
+
+        circle_marker_667073e0dbd8ede8f9e0844bf364f18a.bindPopup(popup_091221a0768497de28820b2395914d0e)
+        ;
+
+        
+    
+    
+            circle_marker_667073e0dbd8ede8f9e0844bf364f18a.bindTooltip(
+                `<div>
+                     Verified: PACIFIC_RANGER
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7ca44fd7bbf07a823db9b1e794f90e79 = L.circleMarker(
+                [-1.15376, -89.91936],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_eb58e468de4e59f47e2ff88d55e12f3b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3f8a3807651e2dfdd57ebdc4c24dca3f = $(`<div id="html_3f8a3807651e2dfdd57ebdc4c24dca3f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001006<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 10.4 knots<br>             <b>Radar Offset:</b> 0.099 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_eb58e468de4e59f47e2ff88d55e12f3b.setContent(html_3f8a3807651e2dfdd57ebdc4c24dca3f);
+            
+        
+
+        circle_marker_7ca44fd7bbf07a823db9b1e794f90e79.bindPopup(popup_eb58e468de4e59f47e2ff88d55e12f3b)
+        ;
+
+        
+    
+    
+            circle_marker_7ca44fd7bbf07a823db9b1e794f90e79.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_4757e8c3c83e88679bae96a073316878 = L.circleMarker(
+                [-1.20185, -89.76521],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_63b5578a4c1200dc9ddda4ffa573336e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_86c48539933a651ed3f0037153a8b18c = $(`<div id="html_86c48539933a651ed3f0037153a8b18c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001004<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 8.8 knots<br>             <b>Radar Offset:</b> 0.077 km<br>             <b>Backscatter:</b> 21.76 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_63b5578a4c1200dc9ddda4ffa573336e.setContent(html_86c48539933a651ed3f0037153a8b18c);
+            
+        
+
+        circle_marker_4757e8c3c83e88679bae96a073316878.bindPopup(popup_63b5578a4c1200dc9ddda4ffa573336e)
+        ;
+
+        
+    
+    
+            circle_marker_4757e8c3c83e88679bae96a073316878.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ebe5403945567b2214a6e12a30236533 = L.circleMarker(
+                [-1.21783, -89.76124],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_961f2173cde857b293a09d42acdb2ca3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d1b6882abcde327fcbfe92d91eec7dee = $(`<div id="html_d1b6882abcde327fcbfe92d91eec7dee" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001004<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 8.8 knots<br>             <b>Radar Offset:</b> 1.843 km<br>             <b>Backscatter:</b> 21.76 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_961f2173cde857b293a09d42acdb2ca3.setContent(html_d1b6882abcde327fcbfe92d91eec7dee);
+            
+        
+
+        circle_marker_ebe5403945567b2214a6e12a30236533.bindPopup(popup_961f2173cde857b293a09d42acdb2ca3)
+        ;
+
+        
+    
+    
+            circle_marker_ebe5403945567b2214a6e12a30236533.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_30acaca266c5cb063df48cedd1c37a43 = L.circleMarker(
+                [-1.17252, -89.97358],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_c2f3dd4f37150b4fc059353f66054660 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_be23b37e600ab01aabdd5df52751a5bb = $(`<div id="html_be23b37e600ab01aabdd5df52751a5bb" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001016<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 7.4 knots<br>             <b>Radar Offset:</b> 0.039 km<br>             <b>Backscatter:</b> 22.01 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_c2f3dd4f37150b4fc059353f66054660.setContent(html_be23b37e600ab01aabdd5df52751a5bb);
+            
+        
+
+        circle_marker_30acaca266c5cb063df48cedd1c37a43.bindPopup(popup_c2f3dd4f37150b4fc059353f66054660)
+        ;
+
+        
+    
+    
+            circle_marker_30acaca266c5cb063df48cedd1c37a43.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b1c1f50fa52f033f87e443649d5d80fe = L.circleMarker(
+                [-1.1824, -89.96051],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_14b006377d772dbf2e35c4b3d4511d06 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b792eeef9f11076a47452845ab000260 = $(`<div id="html_b792eeef9f11076a47452845ab000260" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001016<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 7.4 knots<br>             <b>Radar Offset:</b> 1.795 km<br>             <b>Backscatter:</b> 21.82 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_14b006377d772dbf2e35c4b3d4511d06.setContent(html_b792eeef9f11076a47452845ab000260);
+            
+        
+
+        circle_marker_b1c1f50fa52f033f87e443649d5d80fe.bindPopup(popup_14b006377d772dbf2e35c4b3d4511d06)
+        ;
+
+        
+    
+    
+            circle_marker_b1c1f50fa52f033f87e443649d5d80fe.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_97141f2f1e13b175fe80d5d1a12f05e5 = L.circleMarker(
+                [-1.20114, -89.91089],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_9df551af467f7b5a6a4c66aa2bc306aa = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_67c947237766c87b5356f9a2cd7cb80f = $(`<div id="html_67c947237766c87b5356f9a2cd7cb80f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001018<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 11.5 knots<br>             <b>Radar Offset:</b> 0.091 km<br>             <b>Backscatter:</b> 21.73 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_9df551af467f7b5a6a4c66aa2bc306aa.setContent(html_67c947237766c87b5356f9a2cd7cb80f);
+            
+        
+
+        circle_marker_97141f2f1e13b175fe80d5d1a12f05e5.bindPopup(popup_9df551af467f7b5a6a4c66aa2bc306aa)
+        ;
+
+        
+    
+    
+            circle_marker_97141f2f1e13b175fe80d5d1a12f05e5.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_fae1643e8c117999e2ecf9dcd91863c5 = L.circleMarker(
+                [-1.24901, -89.73612],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_8855c4d5a50b11caa453431c7a416d1f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_49a8799fcd1b59b4094bb0e854d22a07 = $(`<div id="html_49a8799fcd1b59b4094bb0e854d22a07" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> OCEAN_PATROL_04<br>             <b>MMSI:</b> 735001003<br>             <b>Flag:</b> Ecuador Navy<br>             <b>Speed:</b> 8.4 knots<br>             <b>Radar Offset:</b> 0.094 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_8855c4d5a50b11caa453431c7a416d1f.setContent(html_49a8799fcd1b59b4094bb0e854d22a07);
+            
+        
+
+        circle_marker_fae1643e8c117999e2ecf9dcd91863c5.bindPopup(popup_8855c4d5a50b11caa453431c7a416d1f)
+        ;
+
+        
+    
+    
+            circle_marker_fae1643e8c117999e2ecf9dcd91863c5.bindTooltip(
+                `<div>
+                     Verified: OCEAN_PATROL_04
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_07b47627730f7a95717f6cbf0083dfa0 = L.circleMarker(
+                [-1.25035, -89.7477],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_08723762253f5a3762b467a83376d97f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2aae2a1779507b27880c541d02495a76 = $(`<div id="html_2aae2a1779507b27880c541d02495a76" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> OCEAN_PATROL_04<br>             <b>MMSI:</b> 735001003<br>             <b>Flag:</b> Ecuador Navy<br>             <b>Speed:</b> 8.4 knots<br>             <b>Radar Offset:</b> 1.35 km<br>             <b>Backscatter:</b> 21.79 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_08723762253f5a3762b467a83376d97f.setContent(html_2aae2a1779507b27880c541d02495a76);
+            
+        
+
+        circle_marker_07b47627730f7a95717f6cbf0083dfa0.bindPopup(popup_08723762253f5a3762b467a83376d97f)
+        ;
+
+        
+    
+    
+            circle_marker_07b47627730f7a95717f6cbf0083dfa0.bindTooltip(
+                `<div>
+                     Verified: OCEAN_PATROL_04
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f7fe4be3c9ca9bffcd5621a076d37b26 = L.circleMarker(
+                [-1.24738, -89.80855],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_8ffe1cb5354ee539f33514c0a5349225 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_268d234337dba583c44082fea37ccb35 = $(`<div id="html_268d234337dba583c44082fea37ccb35" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> MAR_DEL_SUR<br>             <b>MMSI:</b> 735001029<br>             <b>Flag:</b> Peru<br>             <b>Speed:</b> 5.2 knots<br>             <b>Radar Offset:</b> 0.11 km<br>             <b>Backscatter:</b> 21.79 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_8ffe1cb5354ee539f33514c0a5349225.setContent(html_268d234337dba583c44082fea37ccb35);
+            
+        
+
+        circle_marker_f7fe4be3c9ca9bffcd5621a076d37b26.bindPopup(popup_8ffe1cb5354ee539f33514c0a5349225)
+        ;
+
+        
+    
+    
+            circle_marker_f7fe4be3c9ca9bffcd5621a076d37b26.bindTooltip(
+                `<div>
+                     Verified: MAR_DEL_SUR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7e9ec9bdd813b4384a9f04c37993efd5 = L.circleMarker(
+                [-1.26547, -89.73514],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_9443f357f8033886f19d7a14e7442146 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_34cc3c37ae8825ec443e8b68e670e819 = $(`<div id="html_34cc3c37ae8825ec443e8b68e670e819" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> OCEAN_PATROL_04<br>             <b>MMSI:</b> 735001009<br>             <b>Flag:</b> Ecuador Navy<br>             <b>Speed:</b> 11.3 knots<br>             <b>Radar Offset:</b> 0.038 km<br>             <b>Backscatter:</b> 21.96 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_9443f357f8033886f19d7a14e7442146.setContent(html_34cc3c37ae8825ec443e8b68e670e819);
+            
+        
+
+        circle_marker_7e9ec9bdd813b4384a9f04c37993efd5.bindPopup(popup_9443f357f8033886f19d7a14e7442146)
+        ;
+
+        
+    
+    
+            circle_marker_7e9ec9bdd813b4384a9f04c37993efd5.bindTooltip(
+                `<div>
+                     Verified: OCEAN_PATROL_04
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_02bcf29b4b60210ed4a938eebbda3b50 = L.circleMarker(
+                [-1.25457, -89.79794],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_6c4bb02425df427b5fa43cd4e1ec8f72 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6be38c3c68a5f3bbd0d3e714ecb4c358 = $(`<div id="html_6be38c3c68a5f3bbd0d3e714ecb4c358" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> MAR_DEL_SUR<br>             <b>MMSI:</b> 735001029<br>             <b>Flag:</b> Peru<br>             <b>Speed:</b> 5.2 knots<br>             <b>Radar Offset:</b> 1.347 km<br>             <b>Backscatter:</b> 22.17 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_6c4bb02425df427b5fa43cd4e1ec8f72.setContent(html_6be38c3c68a5f3bbd0d3e714ecb4c358);
+            
+        
+
+        circle_marker_02bcf29b4b60210ed4a938eebbda3b50.bindPopup(popup_6c4bb02425df427b5fa43cd4e1ec8f72)
+        ;
+
+        
+    
+    
+            circle_marker_02bcf29b4b60210ed4a938eebbda3b50.bindTooltip(
+                `<div>
+                     Verified: MAR_DEL_SUR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0167be444ee3f96495f98e470a5139a8 = L.circleMarker(
+                [-1.22429, -89.99683],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_051543ef039f3369ea115385ca1d37c6 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_4375d924d652073eaacf412c98af040f = $(`<div id="html_4375d924d652073eaacf412c98af040f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001022<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 6.0 knots<br>             <b>Radar Offset:</b> 0.11 km<br>             <b>Backscatter:</b> 21.73 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_051543ef039f3369ea115385ca1d37c6.setContent(html_4375d924d652073eaacf412c98af040f);
+            
+        
+
+        circle_marker_0167be444ee3f96495f98e470a5139a8.bindPopup(popup_051543ef039f3369ea115385ca1d37c6)
+        ;
+
+        
+    
+    
+            circle_marker_0167be444ee3f96495f98e470a5139a8.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7ebcd42030f707889809418d4dc3264d = L.circleMarker(
+                [-1.28618, -89.96083],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_afa7c5ee3a77e991b31c8dbdaa908d34 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_7bb6aacbc7602b6e5a9f64ed86d0aaaa = $(`<div id="html_7bb6aacbc7602b6e5a9f64ed86d0aaaa" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ALBATROSS_II<br>             <b>MMSI:</b> 735001010<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 6.3 knots<br>             <b>Radar Offset:</b> 0.109 km<br>             <b>Backscatter:</b> 21.7 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_afa7c5ee3a77e991b31c8dbdaa908d34.setContent(html_7bb6aacbc7602b6e5a9f64ed86d0aaaa);
+            
+        
+
+        circle_marker_7ebcd42030f707889809418d4dc3264d.bindPopup(popup_afa7c5ee3a77e991b31c8dbdaa908d34)
+        ;
+
+        
+    
+    
+            circle_marker_7ebcd42030f707889809418d4dc3264d.bindTooltip(
+                `<div>
+                     Verified: ALBATROSS_II
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c40c28673b336a8b467ec90504f818c3 = L.circleMarker(
+                [-1.29632, -89.94809],
+                {"bubblingMouseEvents": true, "color": "#10b981", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#10b981", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 2}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_9972db9896a5d114e75782b215d1af2b = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_398ce58b2800f8eae03efdfbd8af4ed1 = $(`<div id="html_398ce58b2800f8eae03efdfbd8af4ed1" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 210px;">             <div style="background: #059669; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 ✓ VERIFIED VESSEL (AIS + RADAR)             </div>             <b>Vessel Name:</b> ISABELA_STAR<br>             <b>MMSI:</b> 735001024<br>             <b>Flag:</b> Ecuador<br>             <b>Speed:</b> 7.7 knots<br>             <b>Radar Offset:</b> 0.105 km<br>             <b>Backscatter:</b> 21.88 dB<br>             <b>Sanctuary Zone:</b> Inside Protected MPA         </div>         </div>`)[0];
+                popup_9972db9896a5d114e75782b215d1af2b.setContent(html_398ce58b2800f8eae03efdfbd8af4ed1);
+            
+        
+
+        circle_marker_c40c28673b336a8b467ec90504f818c3.bindPopup(popup_9972db9896a5d114e75782b215d1af2b)
+        ;
+
+        
+    
+    
+            circle_marker_c40c28673b336a8b467ec90504f818c3.bindTooltip(
+                `<div>
+                     Verified: ISABELA_STAR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5ba404e2beea3581610b2795d0d3e97b = L.circleMarker(
+                [-0.98998, -89.90581],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_69570e9e20df88f677275f436ea847ce = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_3f4f1af00894cd7550375f88d7c0ade2 = $(`<div id="html_3f4f1af00894cd7550375f88d7c0ade2" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0004</code><br>             <b>Coordinates:</b> -0.98998, -89.90581<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.99 dB (2 px)<br>             <b>Nearest AIS Vessel:</b> 2.33 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_69570e9e20df88f677275f436ea847ce.setContent(html_3f4f1af00894cd7550375f88d7c0ade2);
+            
+        
+
+        circle_marker_5ba404e2beea3581610b2795d0d3e97b.bindPopup(popup_69570e9e20df88f677275f436ea847ce)
+        ;
+
+        
+    
+    
+            circle_marker_5ba404e2beea3581610b2795d0d3e97b.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0004
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ade97948cf3d8dfd61837877e5eee63b = L.circleMarker(
+                [-0.98998, -89.90581],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_6244386c1fc16aee9914ea23f3c65f41 = L.circleMarker(
+                [-0.9936, -89.90533],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_c0002b8dde58c79a3dfca42780844768 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_603b934d31a0f5d93c86fa13256a420a = $(`<div id="html_603b934d31a0f5d93c86fa13256a420a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0006</code><br>             <b>Coordinates:</b> -0.9936, -89.90533<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 22.25 dB (2 px)<br>             <b>Nearest AIS Vessel:</b> 2.56 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_c0002b8dde58c79a3dfca42780844768.setContent(html_603b934d31a0f5d93c86fa13256a420a);
+            
+        
+
+        circle_marker_6244386c1fc16aee9914ea23f3c65f41.bindPopup(popup_c0002b8dde58c79a3dfca42780844768)
+        ;
+
+        
+    
+    
+            circle_marker_6244386c1fc16aee9914ea23f3c65f41.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0006
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_94cad873a018ab1bd5785d75f3f4917d = L.circleMarker(
+                [-0.9936, -89.90533],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_fdf81a995d843ddf251b5495dd8d98f4 = L.circleMarker(
+                [-1.00072, -89.91098],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_b8a039b017c45476cdbbffcae0a58e62 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_204898c36e715378aadaffd8e663655d = $(`<div id="html_204898c36e715378aadaffd8e663655d" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0015</code><br>             <b>Coordinates:</b> -1.00072, -89.91098<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 22.79 dB (5 px)<br>             <b>Nearest AIS Vessel:</b> 2.62 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_b8a039b017c45476cdbbffcae0a58e62.setContent(html_204898c36e715378aadaffd8e663655d);
+            
+        
+
+        circle_marker_fdf81a995d843ddf251b5495dd8d98f4.bindPopup(popup_b8a039b017c45476cdbbffcae0a58e62)
+        ;
+
+        
+    
+    
+            circle_marker_fdf81a995d843ddf251b5495dd8d98f4.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0015
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c9114083ce540265fe9312d4d3cd88e7 = L.circleMarker(
+                [-1.00072, -89.91098],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_884e4a951e8ed9c9039730ecfa430935 = L.circleMarker(
+                [-1.00693, -89.96985],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_958ab41de2cab87a3968555a44694eb9 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_92803e1020046c66de037faf80a3d585 = $(`<div id="html_92803e1020046c66de037faf80a3d585" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0021</code><br>             <b>Coordinates:</b> -1.00693, -89.96985<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.76 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.54 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_958ab41de2cab87a3968555a44694eb9.setContent(html_92803e1020046c66de037faf80a3d585);
+            
+        
+
+        circle_marker_884e4a951e8ed9c9039730ecfa430935.bindPopup(popup_958ab41de2cab87a3968555a44694eb9)
+        ;
+
+        
+    
+    
+            circle_marker_884e4a951e8ed9c9039730ecfa430935.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0021
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_84b5c03ede61618ac4121f76ee059cac = L.circleMarker(
+                [-1.00693, -89.96985],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_267bd7879d9a504e35f25c02e6590c4a = L.circleMarker(
+                [-1.07465, -89.87021],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_331df8a69fb87b8d1813e84c82316162 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_77e16a4d1885e7571a2a74342a3a0e00 = $(`<div id="html_77e16a4d1885e7571a2a74342a3a0e00" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0033</code><br>             <b>Coordinates:</b> -1.07465, -89.87021<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.85 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 4.5 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_331df8a69fb87b8d1813e84c82316162.setContent(html_77e16a4d1885e7571a2a74342a3a0e00);
+            
+        
+
+        circle_marker_267bd7879d9a504e35f25c02e6590c4a.bindPopup(popup_331df8a69fb87b8d1813e84c82316162)
+        ;
+
+        
+    
+    
+            circle_marker_267bd7879d9a504e35f25c02e6590c4a.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0033
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_87b67e7f8db1d23c117ce5d30c4290cf = L.circleMarker(
+                [-1.07465, -89.87021],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_6caa2f9115861d2eac63565d28c0c7fe = L.circleMarker(
+                [-1.12315, -89.72286],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_3d316bf04f128825958df3dd944a5466 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_aebf196346fcbf68087f71d9846cfe40 = $(`<div id="html_aebf196346fcbf68087f71d9846cfe40" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0035</code><br>             <b>Coordinates:</b> -1.12315, -89.72286<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.73 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 9.98 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_3d316bf04f128825958df3dd944a5466.setContent(html_aebf196346fcbf68087f71d9846cfe40);
+            
+        
+
+        circle_marker_6caa2f9115861d2eac63565d28c0c7fe.bindPopup(popup_3d316bf04f128825958df3dd944a5466)
+        ;
+
+        
+    
+    
+            circle_marker_6caa2f9115861d2eac63565d28c0c7fe.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0035
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_36f8a5feca6eeb2f76b3e4a8643843a4 = L.circleMarker(
+                [-1.12315, -89.72286],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_9bad0fd7dd5aeb32b83d3429e866c648 = L.circleMarker(
+                [-1.09243, -89.91945],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_adeab1344ce321f99a4e312dea80eb10 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_7eabd4b7d6ed264b6d90edc08330bf77 = $(`<div id="html_7eabd4b7d6ed264b6d90edc08330bf77" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0036</code><br>             <b>Coordinates:</b> -1.09243, -89.91945<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.73 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.73 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_adeab1344ce321f99a4e312dea80eb10.setContent(html_7eabd4b7d6ed264b6d90edc08330bf77);
+            
+        
+
+        circle_marker_9bad0fd7dd5aeb32b83d3429e866c648.bindPopup(popup_adeab1344ce321f99a4e312dea80eb10)
+        ;
+
+        
+    
+    
+            circle_marker_9bad0fd7dd5aeb32b83d3429e866c648.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0036
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b3ded0d308d00648764810c1cd9bdf7b = L.circleMarker(
+                [-1.09243, -89.91945],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_783b339de26b95185d1f398d028382a7 = L.circleMarker(
+                [-1.09434, -89.9171],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_20ca2c605b45d353fbe5fe79a3ac781d = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_ac74c3637080f5d22618f163a6d45ef5 = $(`<div id="html_ac74c3637080f5d22618f163a6d45ef5" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0037</code><br>             <b>Coordinates:</b> -1.09434, -89.9171<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.7 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.86 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_20ca2c605b45d353fbe5fe79a3ac781d.setContent(html_ac74c3637080f5d22618f163a6d45ef5);
+            
+        
+
+        circle_marker_783b339de26b95185d1f398d028382a7.bindPopup(popup_20ca2c605b45d353fbe5fe79a3ac781d)
+        ;
+
+        
+    
+    
+            circle_marker_783b339de26b95185d1f398d028382a7.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0037
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2a6ef0cd4dd2f06faa724b9e0f53564d = L.circleMarker(
+                [-1.09434, -89.9171],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_a41ff668a1a262ed3050cee1eb62c895 = L.circleMarker(
+                [-1.15069, -89.71103],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_0df2df55db6693559ea5c1b35e7fcd42 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_fea0dc1e5b9d4d9123da27c4f4b19534 = $(`<div id="html_fea0dc1e5b9d4d9123da27c4f4b19534" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0039</code><br>             <b>Coordinates:</b> -1.15069, -89.71103<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.73 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 8.35 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_0df2df55db6693559ea5c1b35e7fcd42.setContent(html_fea0dc1e5b9d4d9123da27c4f4b19534);
+            
+        
+
+        circle_marker_a41ff668a1a262ed3050cee1eb62c895.bindPopup(popup_0df2df55db6693559ea5c1b35e7fcd42)
+        ;
+
+        
+    
+    
+            circle_marker_a41ff668a1a262ed3050cee1eb62c895.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0039
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_032c3c3e915216eaf9a4937e1f992a00 = L.circleMarker(
+                [-1.15069, -89.71103],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_758e20280035c4b78e933d68ec7193fa = L.circleMarker(
+                [-1.14479, -89.73864],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_fd3bbc4bd89113a98f7af65bd0f4eb51 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_21d02c11928f4e01e48915859320c25a = $(`<div id="html_21d02c11928f4e01e48915859320c25a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0040</code><br>             <b>Coordinates:</b> -1.14479, -89.73864<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.76 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 7.04 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_fd3bbc4bd89113a98f7af65bd0f4eb51.setContent(html_21d02c11928f4e01e48915859320c25a);
+            
+        
+
+        circle_marker_758e20280035c4b78e933d68ec7193fa.bindPopup(popup_fd3bbc4bd89113a98f7af65bd0f4eb51)
+        ;
+
+        
+    
+    
+            circle_marker_758e20280035c4b78e933d68ec7193fa.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0040
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2e7a98042a294e2dd14340efae15367e = L.circleMarker(
+                [-1.14479, -89.73864],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_745eb6730c7ffe77e5ac0e4b88b25794 = L.circleMarker(
+                [-1.15331, -89.70892],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_1f2ddd2a1671d534678d23a9048f4411 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_8d325d22578f8e376bd1227e3f8c5f7e = $(`<div id="html_8d325d22578f8e376bd1227e3f8c5f7e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0041</code><br>             <b>Coordinates:</b> -1.15331, -89.70892<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.7 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 8.33 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_1f2ddd2a1671d534678d23a9048f4411.setContent(html_8d325d22578f8e376bd1227e3f8c5f7e);
+            
+        
+
+        circle_marker_745eb6730c7ffe77e5ac0e4b88b25794.bindPopup(popup_1f2ddd2a1671d534678d23a9048f4411)
+        ;
+
+        
+    
+    
+            circle_marker_745eb6730c7ffe77e5ac0e4b88b25794.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0041
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cfb9e717ff99b89505184436309595e6 = L.circleMarker(
+                [-1.15331, -89.70892],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_96a91bedc92851ccc144531f6589734f = L.circleMarker(
+                [-1.09002, -90.00238],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_546cc3238fd267b0b9a2cec643aed610 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_428eef6ee27de38d14788027f9d2a186 = $(`<div id="html_428eef6ee27de38d14788027f9d2a186" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0042</code><br>             <b>Coordinates:</b> -1.09002, -90.00238<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 23.07 dB (5 px)<br>             <b>Nearest AIS Vessel:</b> 4.05 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_546cc3238fd267b0b9a2cec643aed610.setContent(html_428eef6ee27de38d14788027f9d2a186);
+            
+        
+
+        circle_marker_96a91bedc92851ccc144531f6589734f.bindPopup(popup_546cc3238fd267b0b9a2cec643aed610)
+        ;
+
+        
+    
+    
+            circle_marker_96a91bedc92851ccc144531f6589734f.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0042
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a60b5ff1e9347f21abdeaa1d5f30776f = L.circleMarker(
+                [-1.09002, -90.00238],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_19e29f3ade9895817632a04895461e8b = L.circleMarker(
+                [-1.12157, -89.9483],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_0450aa3b6e5efcd5e078331168ba84f1 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_c087eda319691048642668e52f756654 = $(`<div id="html_c087eda319691048642668e52f756654" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0046</code><br>             <b>Coordinates:</b> -1.12157, -89.9483<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.85 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.02 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_0450aa3b6e5efcd5e078331168ba84f1.setContent(html_c087eda319691048642668e52f756654);
+            
+        
+
+        circle_marker_19e29f3ade9895817632a04895461e8b.bindPopup(popup_0450aa3b6e5efcd5e078331168ba84f1)
+        ;
+
+        
+    
+    
+            circle_marker_19e29f3ade9895817632a04895461e8b.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0046
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_33e28bda6199a8a069223b9112f6510c = L.circleMarker(
+                [-1.12157, -89.9483],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_fb695c0951c266f42067bcf38594d596 = L.circleMarker(
+                [-1.13327, -89.89481],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_ccb1e22b815566ca34c418d53112feb3 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_78bc040a78b7030b2b1a28f3e6e3604f = $(`<div id="html_78bc040a78b7030b2b1a28f3e6e3604f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0047</code><br>             <b>Coordinates:</b> -1.13327, -89.89481<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.88 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 3.46 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_ccb1e22b815566ca34c418d53112feb3.setContent(html_78bc040a78b7030b2b1a28f3e6e3604f);
+            
+        
+
+        circle_marker_fb695c0951c266f42067bcf38594d596.bindPopup(popup_ccb1e22b815566ca34c418d53112feb3)
+        ;
+
+        
+    
+    
+            circle_marker_fb695c0951c266f42067bcf38594d596.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0047
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e596b2062cb27551e4472839c8b3ca13 = L.circleMarker(
+                [-1.13327, -89.89481],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_95edce368c6bb07bd8b53941dbeff22a = L.circleMarker(
+                [-1.12309, -89.95947],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_e078da1df258c2a9b3b3433efb816c52 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_5888c36df1f0890b5bcab238c67c4cc6 = $(`<div id="html_5888c36df1f0890b5bcab238c67c4cc6" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0048</code><br>             <b>Coordinates:</b> -1.12309, -89.95947<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.99 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.9 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_e078da1df258c2a9b3b3433efb816c52.setContent(html_5888c36df1f0890b5bcab238c67c4cc6);
+            
+        
+
+        circle_marker_95edce368c6bb07bd8b53941dbeff22a.bindPopup(popup_e078da1df258c2a9b3b3433efb816c52)
+        ;
+
+        
+    
+    
+            circle_marker_95edce368c6bb07bd8b53941dbeff22a.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0048
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f37752da8eb04e655b098fb1d4eb6ef7 = L.circleMarker(
+                [-1.12309, -89.95947],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_88797a74c1aa915ebff640e629db3f73 = L.circleMarker(
+                [-1.13161, -89.9609],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_50ce36351624376bcd79efa283ad6594 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_caf7cb816688bba4e19cbd645a53a28e = $(`<div id="html_caf7cb816688bba4e19cbd645a53a28e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0050</code><br>             <b>Coordinates:</b> -1.13161, -89.9609<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.76 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 3.27 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_50ce36351624376bcd79efa283ad6594.setContent(html_caf7cb816688bba4e19cbd645a53a28e);
+            
+        
+
+        circle_marker_88797a74c1aa915ebff640e629db3f73.bindPopup(popup_50ce36351624376bcd79efa283ad6594)
+        ;
+
+        
+    
+    
+            circle_marker_88797a74c1aa915ebff640e629db3f73.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0050
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_9651d9964f652ac9ca29ee95bcfc4b76 = L.circleMarker(
+                [-1.13161, -89.9609],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_157f27115e974bbcc05445217d69cc72 = L.circleMarker(
+                [-1.19592, -89.72132],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_35197d58dc19df126bce09c94a5b93ac = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_daf77862ba02bb26ba7885bf9df7b844 = $(`<div id="html_daf77862ba02bb26ba7885bf9df7b844" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0051</code><br>             <b>Coordinates:</b> -1.19592, -89.72132<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.85 dB (2 px)<br>             <b>Nearest AIS Vessel:</b> 5.0 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_35197d58dc19df126bce09c94a5b93ac.setContent(html_daf77862ba02bb26ba7885bf9df7b844);
+            
+        
+
+        circle_marker_157f27115e974bbcc05445217d69cc72.bindPopup(popup_35197d58dc19df126bce09c94a5b93ac)
+        ;
+
+        
+    
+    
+            circle_marker_157f27115e974bbcc05445217d69cc72.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0051
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_feaa4c769e0c8a2a1da638ad63765ba7 = L.circleMarker(
+                [-1.19592, -89.72132],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_0a6cacfb9d0ecdafe645337e870b4681 = L.circleMarker(
+                [-1.1794, -89.81634],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_c1ec0d4877f76f2181bd7015818ed680 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_6a5c3765a9e46dc92fbffca1e02c18b9 = $(`<div id="html_6a5c3765a9e46dc92fbffca1e02c18b9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0054</code><br>             <b>Coordinates:</b> -1.1794, -89.81634<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.73 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.68 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_c1ec0d4877f76f2181bd7015818ed680.setContent(html_6a5c3765a9e46dc92fbffca1e02c18b9);
+            
+        
+
+        circle_marker_0a6cacfb9d0ecdafe645337e870b4681.bindPopup(popup_c1ec0d4877f76f2181bd7015818ed680)
+        ;
+
+        
+    
+    
+            circle_marker_0a6cacfb9d0ecdafe645337e870b4681.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0054
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1adf7d6fe05c0465e55c7f518040c2fc = L.circleMarker(
+                [-1.1794, -89.81634],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_473b71563a77501556dec18f974f1e1c = L.circleMarker(
+                [-1.14859, -90.01852],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_958cc0e1881d1f940d516e2b7a71ca81 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_63e8ce462ad8b0bbf85ae5f554070e1c = $(`<div id="html_63e8ce462ad8b0bbf85ae5f554070e1c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0056</code><br>             <b>Coordinates:</b> -1.14859, -90.01852<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.73 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 5.68 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_958cc0e1881d1f940d516e2b7a71ca81.setContent(html_63e8ce462ad8b0bbf85ae5f554070e1c);
+            
+        
+
+        circle_marker_473b71563a77501556dec18f974f1e1c.bindPopup(popup_958cc0e1881d1f940d516e2b7a71ca81)
+        ;
+
+        
+    
+    
+            circle_marker_473b71563a77501556dec18f974f1e1c.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0056
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_374c5b64a1caa8799e744e73cc3853a3 = L.circleMarker(
+                [-1.14859, -90.01852],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_e25aa696c43340d2425b43fd70178887 = L.circleMarker(
+                [-1.21655, -89.7243],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_1aa9d9a941f3e4b312760cc0646a9bf8 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_2df8d9857c4d3701a623a0dcb268d75f = $(`<div id="html_2df8d9857c4d3701a623a0dcb268d75f" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0057</code><br>             <b>Coordinates:</b> -1.21655, -89.7243<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.85 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 3.75 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_1aa9d9a941f3e4b312760cc0646a9bf8.setContent(html_2df8d9857c4d3701a623a0dcb268d75f);
+            
+        
+
+        circle_marker_e25aa696c43340d2425b43fd70178887.bindPopup(popup_1aa9d9a941f3e4b312760cc0646a9bf8)
+        ;
+
+        
+    
+    
+            circle_marker_e25aa696c43340d2425b43fd70178887.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0057
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_55c27c94f5e7b3840245a22c5f6653c5 = L.circleMarker(
+                [-1.21655, -89.7243],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_d524d5f353c01ed5958f2b9f5d963dc9 = L.circleMarker(
+                [-1.22668, -89.73774],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_4f8e6f5d9215bee21dd59e11de82c9fb = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_e5b16bca480cf023a01aae26d2273c95 = $(`<div id="html_e5b16bca480cf023a01aae26d2273c95" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0060</code><br>             <b>Coordinates:</b> -1.22668, -89.73774<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 22.07 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.41 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_4f8e6f5d9215bee21dd59e11de82c9fb.setContent(html_e5b16bca480cf023a01aae26d2273c95);
+            
+        
+
+        circle_marker_d524d5f353c01ed5958f2b9f5d963dc9.bindPopup(popup_4f8e6f5d9215bee21dd59e11de82c9fb)
+        ;
+
+        
+    
+    
+            circle_marker_d524d5f353c01ed5958f2b9f5d963dc9.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0060
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_a05212defbd04810dadade31005dd8c3 = L.circleMarker(
+                [-1.22668, -89.73774],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_fa59a4fa6827c50e7db0c88e3f84ff08 = L.circleMarker(
+                [-1.17275, -90.00713],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_9e1d31a732e5021837689b791f7ec5f6 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_8009f65d6527126b2a3c915d8089df87 = $(`<div id="html_8009f65d6527126b2a3c915d8089df87" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0062</code><br>             <b>Coordinates:</b> -1.17275, -90.00713<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 22.53 dB (2 px)<br>             <b>Nearest AIS Vessel:</b> 3.73 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_9e1d31a732e5021837689b791f7ec5f6.setContent(html_8009f65d6527126b2a3c915d8089df87);
+            
+        
+
+        circle_marker_fa59a4fa6827c50e7db0c88e3f84ff08.bindPopup(popup_9e1d31a732e5021837689b791f7ec5f6)
+        ;
+
+        
+    
+    
+            circle_marker_fa59a4fa6827c50e7db0c88e3f84ff08.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0062
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_159dd7ca3542de7e595f804cb3083cb2 = L.circleMarker(
+                [-1.17275, -90.00713],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_5ff56bafb944a58b9da23eadcf0352a3 = L.circleMarker(
+                [-1.24679, -89.77057],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_6303c60c29cceb484798906415ad5cca = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_de99a56ae1cce81168ec4454610aca7a = $(`<div id="html_de99a56ae1cce81168ec4454610aca7a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0066</code><br>             <b>Coordinates:</b> -1.24679, -89.77057<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.7 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 3.88 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_6303c60c29cceb484798906415ad5cca.setContent(html_de99a56ae1cce81168ec4454610aca7a);
+            
+        
+
+        circle_marker_5ff56bafb944a58b9da23eadcf0352a3.bindPopup(popup_6303c60c29cceb484798906415ad5cca)
+        ;
+
+        
+    
+    
+            circle_marker_5ff56bafb944a58b9da23eadcf0352a3.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0066
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1bbe4eb8a2ba980ffc7b3cdb42985daa = L.circleMarker(
+                [-1.24679, -89.77057],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_39490c69f62db6b8e1afeb05fd2bfde1 = L.circleMarker(
+                [-1.25273, -89.75445],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_99f2555f671f9dec846649d50e438fe8 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_f025c9f5a4606f5932395c09aefa32a7 = $(`<div id="html_f025c9f5a4606f5932395c09aefa32a7" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0067</code><br>             <b>Coordinates:</b> -1.25273, -89.75445<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.79 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.14 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_99f2555f671f9dec846649d50e438fe8.setContent(html_f025c9f5a4606f5932395c09aefa32a7);
+            
+        
+
+        circle_marker_39490c69f62db6b8e1afeb05fd2bfde1.bindPopup(popup_99f2555f671f9dec846649d50e438fe8)
+        ;
+
+        
+    
+    
+            circle_marker_39490c69f62db6b8e1afeb05fd2bfde1.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0067
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_497fc3aa34dcb8f2571a2b475996c7e9 = L.circleMarker(
+                [-1.25273, -89.75445],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_c0f541b290e055b532f648462f82e4ba = L.circleMarker(
+                [-1.26519, -89.95805],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_7fb68b74b4fc14c7300658b43faee932 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_7ea89b3fc8fdf4c972c6f3d6c20bebeb = $(`<div id="html_7ea89b3fc8fdf4c972c6f3d6c20bebeb" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0072</code><br>             <b>Coordinates:</b> -1.26519, -89.95805<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.7 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.25 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_7fb68b74b4fc14c7300658b43faee932.setContent(html_7ea89b3fc8fdf4c972c6f3d6c20bebeb);
+            
+        
+
+        circle_marker_c0f541b290e055b532f648462f82e4ba.bindPopup(popup_7fb68b74b4fc14c7300658b43faee932)
+        ;
+
+        
+    
+    
+            circle_marker_c0f541b290e055b532f648462f82e4ba.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0072
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_31e8790cd5ba9911ef9191169f832370 = L.circleMarker(
+                [-1.26519, -89.95805],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+            var circle_marker_c70d56fbc240331c906bae89ca349814 = L.circleMarker(
+                [-1.26943, -89.94112],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ef4444", "fillOpacity": 0.35, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 12, "stroke": true, "weight": 3}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+    
+        var popup_bccca3e85660a46ab3935f4ffa9ca5e3 = L.popup({
+  "maxWidth": 340,
+});
+
+        
+            
+                var html_bfc773c99feafb55a362b15eda921288 = $(`<div id="html_bfc773c99feafb55a362b15eda921288" style="width: 100.0%; height: 100.0%;">         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 12px; min-width: 230px;">             <div style="background: #dc2626; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">                 🚨 CRITICAL SANCTUARY VIOLATION             </div>             <b>Target ID:</b> <code>RADAR-S1-0073</code><br>             <b>Coordinates:</b> -1.26943, -89.94112<br>             <b>Radio Status:</b> <span style="color: red; font-weight: bold;">NO AIS TRANSPONDER</span><br>             <b>Radar Return:</b> 21.73 dB (1 px)<br>             <b>Nearest AIS Vessel:</b> 2.81 km away<br>             <b>Scene Acquisition:</b> 2024-05-13T11:42:53.818752+00:00<br>             <div style="background: #fef2f2; border-left: 3px solid #ef4444; padding: 4px; margin-top: 6px; color: #991b1b; font-size: 11px;">                 <b>Alert:</b> Unregistered steel hull operating in restricted waters.             </div>         </div>         </div>`)[0];
+                popup_bccca3e85660a46ab3935f4ffa9ca5e3.setContent(html_bfc773c99feafb55a362b15eda921288);
+            
+        
+
+        circle_marker_c70d56fbc240331c906bae89ca349814.bindPopup(popup_bccca3e85660a46ab3935f4ffa9ca5e3)
+        ;
+
+        
+    
+    
+            circle_marker_c70d56fbc240331c906bae89ca349814.bindTooltip(
+                `<div>
+                     🚨 CRITICAL SANCTUARY VIOLATION: RADAR-S1-0073
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dcecd8d9a67a1b14c8c512735a474ebd = L.circleMarker(
+                [-1.26943, -89.94112],
+                {"bubblingMouseEvents": true, "color": "#ffffff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#ffffff", "fillOpacity": 1.0, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3, "stroke": true, "weight": 1}
+            ).addTo(map_5ef19d83b53dc04f2ec7ae1a7af23dc0);
+        
+</script>
+</html>
