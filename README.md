@@ -1,5 +1,6 @@
 # 🛰️ GhostFleet Watch
 > **Autonomous Maritime OSINT: Uncovering Dark Vessels and Illegal Fishing in Marine Sanctuaries using Copernicus Sentinel-1 SAR & Real-Time AIS Radio Telemetry.**
+
 https://clever-salamander-2b695b.netlify.app/
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
